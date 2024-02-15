@@ -18,26 +18,13 @@ def setup_websockify():
             "vncserver executable not found, please install a VNC server"
         )
 
-    # TigerVNC provides the option to connect a Unix socket. TurboVNC does not.
-    # TurboVNC and TigerVNC share the same origin and both use a Perl script
-    # as the executable vncserver. We can determine if vncserver is TigerVNC
-    # by searching TigerVNC string in the Perl script.
-    with open(vncserver) as vncserver_file:
-        is_tigervnc = "TigerVNC" in vncserver_file.read()
-
-    if is_tigervnc:
-        vnc_args = [vncserver, '-rfbunixpath', sockets_path]
-        socket_args = ['--unix-target', sockets_path]
-    else:
-        vnc_args = [vncserver]
-        socket_args = []
+    vnc_args = [vncserver, '-rfbunixpath', sockets_path]
+    socket_args = ['--unix-target', sockets_path]
 
     if not os.path.exists(os.path.expanduser('~/.vnc/xstartup')):
         vnc_args.extend(['-xstartup', os.path.join(HERE, 'share/xstartup')])
 
-    vnc_command = shlex.join(
-        vnc_args
-        + [
+    vnc_command = vnc_args + [
             '-verbose',
             '-geometry',
             '1680x1050',
@@ -45,7 +32,6 @@ def setup_websockify():
             'None',
             '-fg',
         ]
-    )
 
     return {
         'command': [
@@ -56,7 +42,7 @@ def setup_websockify():
             '{port}',
         ]
         + socket_args
-        + ['--', '/bin/sh', '-c', f'cd {os.getcwd()} && {vnc_command}'],
+        + ['--'] + vnc_command,
         'timeout': 30,
         'new_browser_window': True,
         # We want the launcher entry to point to /desktop/, not to /desktop-websockify/
