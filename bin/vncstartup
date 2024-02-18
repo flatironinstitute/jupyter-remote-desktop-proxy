@@ -1,0 +1,16 @@
+#!/bin/bash
+# this effectively replicates the functionality of vncserver, 
+# but works with TigerVNC 1.13 as well
+# You can customize this for your site by setting VNCSTARTUP to your own script.
+
+# assume one per user and port is open
+# TODO dynamically detect display somehow?
+uid=`id -u`
+display=:$[uid%10000]
+host=`uname -n`
+
+cookie=`mcookie`
+xauth add "$host$display" . "$cookie"
+xauth add "$host/unix$display" . "$cookie"
+
+exec xinit /etc/X11/xinit/Xsession -- `which Xvnc` $display -auth ${XAUTHORITY:=$HOME/.Xauthority} "$@"

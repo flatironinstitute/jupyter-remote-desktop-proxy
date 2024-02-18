@@ -99,4 +99,5 @@ setup(
             ],
         ),
     ],
+    scripts=['bin/vncstartup'],
 )

@@ -5,30 +5,11 @@ import subprocess
 from shutil import which
 
 def setup_websockify():
-    xauthority = os.getenv('XAUTHORITY', os.path.join(os.getenv('HOME'), '.Xauthority'))
-
     def websockify_command(unix_socket=None):
-        # assume one per user and port is open
-        # TODO dynamically detect display somehow?
-        uid = os.getuid()
-        display = f":{uid}"
-        host = socket.gethostname()
+        vncstartup = os.getenv('VNCSTARTUP', 'vncstartup')
 
-        cookie = subprocess.run(['mcookie'], capture_output=True, check=True).stdout
-        subprocess.run(['xauth', '-f', xauthority], input=
-            f"add {host}{display} . ".encode() + cookie +
-            f"add {host}/unix{display} . ".encode() + cookie,
-            check=True)
-
-        xvnc = which('Xvnc')
         cmd = [
-                'xinit',
-                '/etc/X11/xinit/Xsession',
-                '--',
-                xvnc,
-                display,
-                '-auth',
-                xauthority,
+                vncstartup,
                 '-geometry',
                 '1680x1050',
                 '-SecurityTypes',
@@ -44,9 +25,6 @@ def setup_websockify():
 
     return {
         'command': websockify_command,
-        'environment': {
-            'XAUTHORITY': xauthority
-        },
         'websockify': True,
         'unix_socket': True,
         'timeout': 60,
