@@ -32,5 +32,5 @@ def setup_websockify():
         # We want the launcher entry to point to /desktop/, not to /desktop-websockify/
         # /desktop/ is the user facing URL, while /desktop-websockify/ now *only* serves
         # websockets.
-        "launcher_entry": {"title": "Desktop", "path_info": "desktop"},
+        "launcher_entry": {"title": "Virtual Desktop", "path_info": "desktop"},
     }
