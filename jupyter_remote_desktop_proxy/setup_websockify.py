@@ -17,7 +17,7 @@ def setup_websockify():
             ]
 
         if unix_socket:
-            cmd.extend(['-rfbport=-1', '-rfbunixpath', unix_socket])
+            cmd.extend(['-rfbport=-1', '-rfbunixpath='+unix_socket])
         else:
             cmd.append('-rfbport={port}')
 
