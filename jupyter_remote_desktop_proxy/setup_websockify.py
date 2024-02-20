@@ -1,8 +1,4 @@
 import os
-import socket
-import tempfile
-import subprocess
-from shutil import which
 
 def setup_websockify():
     def websockify_command(unix_socket=None):
@@ -32,5 +28,10 @@ def setup_websockify():
         # We want the launcher entry to point to /desktop/, not to /desktop-websockify/
         # /desktop/ is the user facing URL, while /desktop-websockify/ now *only* serves
         # websockets.
-        "launcher_entry": {"title": "Virtual Desktop", "path_info": "desktop"},
+        "launcher_entry": {
+            "title": "Virtual Desktop",
+            "path_info": "desktop",
+            "icon_path": os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'launcher.svg'),
+            "category": "Other",
+        },
     }
