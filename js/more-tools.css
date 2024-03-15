@@ -1,0 +1,27 @@
+#more-tools-menu {
+  position: absolute;
+  top: calc(36px + 1rem);
+  right: 1rem;
+  width: 200px;
+  height: 200px;
+  background-color: var(--jupyter-dark-grey);
+  color: white;
+}
+
+#more-tools-menu button {
+  background-color: inherit;
+  background-image: none;
+  border-width: 0;
+  margin: 0;
+  padding: 0;
+  text-transform: none;
+  cursor: pointer;
+  color: white;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+}
+
+#more-tools-menu * {
+  box-sizing: border-box;
+}

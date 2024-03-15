@@ -10,6 +10,7 @@ import "./index.css";
 import RFB from "@novnc/novnc/core/rfb";
 
 import { setupTooltip } from "./tooltip.js";
+import { setupMoreTools } from "./more-tools.js";
 
 // When this function is called we have successfully connected to a server
 function connectedToServer() {
@@ -72,3 +73,8 @@ setupTooltip(
   document.getElementById("clipboard-button"),
   document.getElementById("clipboard-container"),
 );
+
+setupMoreTools({
+  trigger: document.getElementById("more-tools-button"),
+  rfb
+});
