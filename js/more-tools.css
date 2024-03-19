@@ -2,24 +2,40 @@
   position: absolute;
   top: calc(36px + 1rem);
   right: 1rem;
-  width: 200px;
-  height: 200px;
   background-color: var(--jupyter-dark-grey);
   color: white;
 }
 
-#more-tools-menu button {
+#more-tools-menu li {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#more-tools-menu input[type="checkbox"] {
+  position: absolute;
+  display: block;
+  top: 0.9rem;
+  left: 0.8rem;
+}
+
+#more-tools-menu button,
+#more-tools-menu input,
+#more-tools-menu label {
+  font-size: 1rem;
+  line-height: 1;
   background-color: inherit;
   background-image: none;
   border-width: 0;
   margin: 0;
-  padding: 0;
   text-transform: none;
   cursor: pointer;
   color: white;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
+  padding: 0;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  padding-left: 2.2rem;
+  padding-right: 2rem;
 }
 
 #more-tools-menu * {
