@@ -49,7 +49,7 @@ rfb.addEventListener("connect", connectedToServer);
 rfb.addEventListener("disconnect", disconnectedFromServer);
 
 // Scale our viewport so the user doesn't have to scroll
-rfb.resizeSession = true;
+rfb.resizeSession = false;
 rfb.scaleViewport = true;
 
 // Use a CSS variable to set background color

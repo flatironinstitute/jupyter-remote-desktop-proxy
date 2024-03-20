@@ -38,7 +38,7 @@ function render({ container, rfb }) {
     </li>
     <li>
       <input type="checkbox" id="remote-resizing" />
-      <label for="remote-resizing">Remote resizing</label>
+      <label for="remote-resizing">Auto resize</label>
     </li>
     <li style="display: flex; column-gap: 1rem; align-items: center; justify-content: flex-end;">
       <label for="quality">Quality</label>
