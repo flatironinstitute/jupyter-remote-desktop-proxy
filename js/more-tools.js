@@ -33,34 +33,60 @@ function render({ container, rfb }) {
   container.innerHTML = `
   <ul>
     <li>
-      <button id="toggle-fullscreen">Toggle fullscreen</button>
+      <input type="checkbox" id="toggle-fullscreen" />
+      <label for="toggle-fullscreen">Fullscreen</button>
     </li>
     <li>
       <input type="checkbox" id="remote-resizing" />
       <label for="remote-resizing">Remote resizing</label>
     </li>
+    <li style="display: flex; column-gap: 1rem; align-items: center; justify-content: flex-end;">
+      <label for="quality">Quality</label>
+      <input id="quality" type="range" min="0" max="9" />
+    </li>
+    <li style="display: flex; column-gap: 1rem; align-items: center; justify-content: flex-end;">
+      <label for="compression">Compression</label>
+      <input id="compression" type="range" min="0" max="9" />
+    </li>
   </ul>
   `;
 
-  container
-    .querySelector(`#toggle-fullscreen`)
-    ?.addEventListener(`click`, () => {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else if (document.exitFullscreen) {
-        document.exitFullscreen();
-      }
-    });
+  /** @type {HTMLInputElement | null} */
+  const fullscreen_checkbox = container.querySelector(`#toggle-fullscreen`);
+  if (fullscreen_checkbox)
+    fullscreen_checkbox.checked = document.fullscreenElement ? true : false;
+  fullscreen_checkbox?.addEventListener(`change`, () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  });
 
   /** @type {HTMLInputElement | null} */
   const resizing_checkbox = container.querySelector(`#remote-resizing`);
-
   if (resizing_checkbox) resizing_checkbox.checked = rfb.resizeSession;
-
   resizing_checkbox?.addEventListener(`change`, (event) => {
     // @ts-ignore
     const checked = event.currentTarget?.checked;
     rfb.resizeSession = checked;
+  });
+
+  /** @type {HTMLInputElement | null} */
+  const quality_slider = container.querySelector(`#quality`);
+  if (quality_slider) quality_slider.valueAsNumber = parseInt(rfb.qualityLevel);
+  quality_slider?.addEventListener(`input`, () => {
+    rfb.qualityLevel = quality_slider.valueAsNumber;
+    console.log(`Quality level is now:`, rfb.qualityLevel);
+  });
+
+  /** @type {HTMLInputElement | null} */
+  const compression_slider = container.querySelector(`#quality`);
+  if (compression_slider)
+    compression_slider.valueAsNumber = parseInt(rfb.compressionLevel);
+  compression_slider?.addEventListener(`input`, () => {
+    rfb.compressionLevel = compression_slider.valueAsNumber;
+    console.log(`Compression level is now:`, rfb.compressionLevel);
   });
 
   // <li>

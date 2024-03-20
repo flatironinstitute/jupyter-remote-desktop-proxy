@@ -6,38 +6,17 @@
   color: white;
 }
 
-#more-tools-menu li {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-#more-tools-menu input[type="checkbox"] {
-  position: absolute;
-  display: block;
-  top: 0.9rem;
-  left: 0.8rem;
-}
-
-#more-tools-menu button,
-#more-tools-menu input,
-#more-tools-menu label {
-  font-size: 1rem;
-  line-height: 1;
-  background-color: inherit;
-  background-image: none;
-  border-width: 0;
-  margin: 0;
-  text-transform: none;
-  cursor: pointer;
-  color: white;
-  padding: 0;
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
-  padding-left: 2.2rem;
-  padding-right: 2rem;
-}
-
 #more-tools-menu * {
   box-sizing: border-box;
+}
+
+#more-tools-menu ul {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.6rem;
+  padding: 0.8rem;
+}
+
+#more-tools-menu li * {
+  cursor: pointer;
 }
