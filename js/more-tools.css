@@ -1,0 +1,22 @@
+#more-tools-menu {
+  position: absolute;
+  top: calc(36px + 1rem);
+  right: 1rem;
+  background-color: var(--jupyter-dark-grey);
+  color: white;
+}
+
+#more-tools-menu * {
+  box-sizing: border-box;
+}
+
+#more-tools-menu ul {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.6rem;
+  padding: 0.8rem;
+}
+
+#more-tools-menu li * {
+  cursor: pointer;
+}
