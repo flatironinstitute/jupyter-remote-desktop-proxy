@@ -5,12 +5,11 @@
 
 # assume one per user and port is open
 # TODO dynamically detect display somehow?
-uid=`id -u`
-display=:$[uid%10000]
+display=:1
 host=`uname -n`
 
 cookie=`mcookie`
 xauth add "$host$display" . "$cookie"
 xauth add "$host/unix$display" . "$cookie"
 
-exec xinit /etc/X11/xinit/Xsession -- `which Xvnc` $display -auth ${XAUTHORITY:=$HOME/.Xauthority} "$@"
+exec xinit ~/.vnc/xstartup -- `which Xvnc` $display -auth ${XAUTHORITY:=$HOME/.Xauthority} "$@"

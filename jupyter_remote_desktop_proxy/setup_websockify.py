@@ -22,7 +22,7 @@ def setup_websockify():
     return {
         'command': websockify_command,
         'websockify': True,
-        'unix_socket': True,
+        'unix_socket': False,
         'timeout': 60,
         'new_browser_tab': True,
         # We want the launcher entry to point to /desktop/, not to /desktop-websockify/
