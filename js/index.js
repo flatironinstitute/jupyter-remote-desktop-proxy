@@ -7,9 +7,9 @@ import "reset-css";
 import "./index.css";
 
 // RFB holds the API to connect and communicate with a VNC server
-import RFB from "@novnc/novnc/core/rfb";
+import RFB from "@novnc/novnc/lib/rfb";
 
-import { setupTooltip } from "./tooltip.js";
+import { setupClipboard } from "./clipboard.js";
 import { setupMoreTools } from "./more-tools.js";
 
 const maxRetryCount = 5;
@@ -63,7 +63,6 @@ function connect() {
   rfb.addEventListener("connect", connectedToServer);
   rfb.addEventListener("disconnect", disconnectedFromServer);
 
-  // Scale our viewport so the user doesn't have to scroll
   rfb.scaleViewport = true;
   rfb.resizeSession = false;
 
@@ -84,9 +83,10 @@ function connect() {
     .getElementById("clipboard-text")
     .addEventListener("change", clipboardSend);
 
-  setupTooltip(
+  setupClipboard(
     document.getElementById("clipboard-button"),
     document.getElementById("clipboard-container"),
+    [document.body, document.getElementsByTagName("canvas")[0]],
   );
 
   setupMoreTools({

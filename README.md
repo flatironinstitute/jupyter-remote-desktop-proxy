@@ -12,6 +12,8 @@ This is based on https://github.com/ryanlovett/nbnovnc.
 
 When this extension is launched it will run a Linux desktop on the Jupyter single-user server, and proxy it to your browser using VNC via Jupyter.
 
+![Screenshot of jupyter-remote-desktop-proxy XFCE desktop](https://raw.githubusercontent.com/jupyterhub/jupyter-remote-desktop-proxy/main/tests/reference/desktop.png)
+
 ## VNC Server
 
 This extension requires a [VNC Server](https://en.wikipedia.org/wiki/Virtual_Network_Computing)
@@ -31,12 +33,7 @@ For an example, see the [`Dockerfile`](./Dockerfile) in this repository which in
    pip install jupyter-remote-desktop-proxy
    ```
 
-2. Install the [websockify](https://github.com/novnc/websockify) dependency. Unfortunately,
-   the PyPI `websockify` package is broken, so you need to install it either
-   from [conda-forge](https://anaconda.org/conda-forge/websockify) or with
-   [apt](https://packages.ubuntu.com/search?suite=all&searchon=names&keywords=websockify)
-
-3. Install the packages needed to provide a VNC server and the actual Linux Desktop environment.
+2. Install the packages needed to provide a VNC server and the actual Linux Desktop environment.
    You need to pick a desktop environment (there are many!) - here are the packages
    to use TigerVNC and the light-weight [XFCE4](https://www.xfce.org/) desktop environment on Ubuntu 22.04:
 

@@ -4,17 +4,18 @@
  * Mostly follows https://floating-ui.com/docs/tutorial
  */
 import { computePosition, flip, shift, offset, arrow } from "@floating-ui/dom";
-import "./tooltip.css";
+import "./clipboard.css";
 
 /**
- * Setup trigger element to toggle showing / hiding tooltip element
+ * Setup trigger element to toggle showing / hiding clipboard element
  * @param {Element} trigger
- * @param {Element} tooltip
+ * @param {Element} clipboard
+ * @param {Array[Element]} closers array of elements that should close the clipboard if clicked
  */
-export function setupTooltip(trigger, tooltip) {
-  const arrowElement = tooltip.querySelector(".arrow");
+export function setupClipboard(trigger, clipboard, closers) {
+  const arrowElement = clipboard.querySelector(".arrow");
   function updatePosition() {
-    computePosition(trigger, tooltip, {
+    computePosition(trigger, clipboard, {
       placement: "bottom",
       middleware: [
         offset(6),
@@ -23,7 +24,7 @@ export function setupTooltip(trigger, tooltip) {
         arrow({ element: arrowElement }),
       ],
     }).then(({ x, y, placement, middlewareData }) => {
-      Object.assign(tooltip.style, {
+      Object.assign(clipboard.style, {
         left: `${x}px`,
         top: `${y}px`,
       });
@@ -49,9 +50,24 @@ export function setupTooltip(trigger, tooltip) {
   }
 
   trigger.addEventListener("click", (e) => {
-    tooltip.classList.toggle("hidden");
+    clipboard.classList.toggle("hidden");
     trigger.classList.toggle("active");
     updatePosition();
     e.preventDefault();
+    e.stopPropagation();
+  });
+
+  // If the clipboard is clicked this should not be passed to the desktop
+  clipboard.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+  // Close the popup if we click outside it
+  closers.forEach((el) => {
+    el.addEventListener("click", () => {
+      if (trigger.classList.contains("active")) {
+        clipboard.classList.toggle("hidden");
+        trigger.classList.toggle("active");
+      }
+    });
   });
 }

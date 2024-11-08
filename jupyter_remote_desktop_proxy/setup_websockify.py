@@ -21,9 +21,9 @@ def setup_websockify():
 
     return {
         'command': websockify_command,
-        'websockify': True,
+        'raw_socket_proxy': True,
         'unix_socket': True,
-        'timeout': 60,
+        'timeout': 30,
         'new_browser_tab': True,
         # We want the launcher entry to point to /desktop/, not to /desktop-websockify/
         # /desktop/ is the user facing URL, while /desktop-websockify/ now *only* serves
